@@ -5,7 +5,6 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <PublishSingleFile>true</PublishSingleFile>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <LangVersion>12.0</LangVersion>
     <AssemblyName>Services</AssemblyName>
