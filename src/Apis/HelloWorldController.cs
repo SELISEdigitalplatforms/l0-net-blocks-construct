@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -12,6 +13,7 @@ namespace Api.Controllers
         /// <returns>The greeting message.</returns>
         [HttpGet]
         [Route("Index")]
+        [Authorize]
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult Get()
         {
