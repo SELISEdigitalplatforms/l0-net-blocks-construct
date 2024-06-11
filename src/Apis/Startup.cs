@@ -1,6 +1,8 @@
+using Apis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Security.Claims;
 using System.Text;
 
@@ -70,14 +72,23 @@ public class Startup
         services.AddControllers();
         //http://localhost:51846/HelloWorld/Index
         // Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTRjNDZlODEtNjUxNy00YmViLWEyNzQtYjFiYzY2MjA0YmI4IiwiZGlzcGxheV9uYW1lIjoiQ29tcG9zZSBBZG1pbiIsImVtYWlsIjoiY29tcG9zZUB5b3BtYWlsLmNvbSIsInBob25lX251bWJlciI6Iis4ODAgICAxNjc0NDExMzAyIiwibGFuZ3VhZ2UiOiJlbi1VUyIsInVzZXJfbG9nZ2VkaW4iOiJUcnVlIiwibmJmIjoxNzE3ODEzMzgxLCJleHAiOjE3MTk5NjkzODEsImlzcyI6IllPVVJfSVNTVUVSIiwiYXVkIjoiWU9VUl9BVURJRU5DRSJ9.R1ods7WzSskcxJE0AFOKTRoJuewAkOVZcmbnQC9fQrg
+
+        services.AddHttpClient();
+        services.AddSerilog();
+
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseMiddleware<TenantEnrichmentMiddleware>();
+
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
         }
+
+        
+
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();

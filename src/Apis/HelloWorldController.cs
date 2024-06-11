@@ -7,6 +7,13 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class HelloWorldController : ControllerBase
     {
+        private readonly ILogger<HelloWorldController> _logger;
+
+        public HelloWorldController(ILogger<HelloWorldController> logger)
+        {
+            _logger = logger;
+        }
+
         /// <summary>
         /// Gets the default greeting message.
         /// </summary>
@@ -17,6 +24,9 @@ namespace Api.Controllers
         [ProducesResponseType(typeof(string), 200)]
         public IActionResult Get()
         {
+            _logger.LogError("from error");
+            _logger.LogCritical("from LogCritical");
+            _logger.LogInformation("from LogInformation");
             return Ok("Hello, World!");
         }
 
